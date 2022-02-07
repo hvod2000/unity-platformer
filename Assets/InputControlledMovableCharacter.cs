@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputControlledMovableCharacter : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 1;
+    private float speed = 4;
     private Rigidbody2D rigidbody2d;
     private void Start()
     {
@@ -15,6 +15,8 @@ public class InputControlledMovableCharacter : MonoBehaviour
     void Update()
     {
         var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        rigidbody2d.velocity += direction * speed * 0.2f;
+        Vector2 velocity = rigidbody2d.velocity;
+        velocity.x = direction.x * speed;
+        rigidbody2d.velocity = velocity;
     }
 }
