@@ -32,6 +32,11 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 sysinfo.txt
+*_Data/
+*.debug
+*.so
+*.debug
+*.x86_64
 *.apk
 *.aab
 *.unitypackage
