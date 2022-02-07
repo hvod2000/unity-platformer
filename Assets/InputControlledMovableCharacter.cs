@@ -14,7 +14,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     void Update()
     {
-        var direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rigidbody2d.velocity += direction * speed * 0.2f;
     }
 }
