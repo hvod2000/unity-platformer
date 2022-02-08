@@ -366,6 +366,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  impassableObstacle:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!95 &666476376
 Animator:
   serializedVersion: 3
@@ -2477,7 +2480,7 @@ GameObject:
   - component: {fileID: 1327220094}
   - component: {fileID: 1327220093}
   - component: {fileID: 1327220092}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: World Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

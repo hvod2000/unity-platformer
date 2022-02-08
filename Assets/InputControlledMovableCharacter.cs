@@ -12,9 +12,11 @@ public class InputControlledMovableCharacter : MonoBehaviour
         falling = 7569,
     } 
 
-    [SerializeField]
-    private float speed = 4;
+    [SerializeField] private float speed = 4;
+    [SerializeField] private LayerMask impassableObstacle;
+    
     private Rigidbody2D rigidbody2d;
+    private BoxCollider2D collider;
     private SpriteRenderer sprite;
     private Animator anim;
     
@@ -22,6 +24,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
     private void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
@@ -29,6 +32,11 @@ public class InputControlledMovableCharacter : MonoBehaviour
     void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (!canMoveInDirection(new Vector2(direction.x, 0f)))
+        {
+            direction.x = 0f;
+        }
+        
         Vector2 velocity = rigidbody2d.velocity;
         velocity.x = direction.x * speed;
         rigidbody2d.velocity = velocity;
@@ -38,7 +46,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
     void UpdateAnimationState()
     {
         AnimationState state = AnimationState.idle;
-        
+
         if (direction.x != 0)
         {
             sprite.flipX = (direction.x < 0);
@@ -51,5 +59,10 @@ public class InputControlledMovableCharacter : MonoBehaviour
         }
 
         anim.SetInteger("desired state", (int)state);
+    }
+
+    bool canMoveInDirection(Vector2 direction)
+    {
+        return !Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, direction, 0.01f, impassableObstacle);
     }
 }
