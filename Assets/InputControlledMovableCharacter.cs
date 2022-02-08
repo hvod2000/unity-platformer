@@ -9,6 +9,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
     {
         idle = 103,
         running = 236,
+        falling = 7569,
     } 
 
     [SerializeField]
@@ -43,7 +44,12 @@ public class InputControlledMovableCharacter : MonoBehaviour
             sprite.flipX = (direction.x < 0);
             state = AnimationState.running;
         }
-        
+
+        if (rigidbody2d.velocity.y < -0.1)
+        {
+            state = AnimationState.falling;
+        }
+
         anim.SetInteger("desired state", (int)state);
     }
 }
