@@ -81,5 +81,9 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     public void OnDeadlyRegionStay(GameObject regionGameObject)
     {
+        if (rigidbody2d.velocity.y < -0.1)
+        {
+            state = AnimationState.dead;
+        }
     }
 }
