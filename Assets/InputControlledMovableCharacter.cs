@@ -10,10 +10,12 @@ public class InputControlledMovableCharacter : MonoBehaviour
         idle = 103,
         running = 236,
         falling = 7569,
+        dead = 1598,
     } 
 
     [SerializeField] private float speed = 4;
     [SerializeField] private LayerMask impassableObstacle;
+    private AnimationState state = AnimationState.idle;
     
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D collider;
@@ -31,12 +33,17 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     void Update()
     {
+        if (state == AnimationState.dead)
+        {
+            return;
+        }
+
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (!canMoveInDirection(new Vector2(direction.x, 0f)))
         {
             direction.x = 0f;
         }
-        
+
         Vector2 velocity = rigidbody2d.velocity;
         velocity.x = direction.x * speed;
         rigidbody2d.velocity = velocity;
@@ -45,7 +52,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     void UpdateAnimationState()
     {
-        AnimationState state = AnimationState.idle;
+        state = AnimationState.idle;
 
         if (direction.x != 0)
         {
