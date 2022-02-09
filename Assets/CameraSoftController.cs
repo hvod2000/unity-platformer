@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSoftController : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    
+
     void Update()
     {
         Vector3 pos = transform.position;

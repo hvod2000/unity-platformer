@@ -11,17 +11,17 @@ public class InputControlledMovableCharacter : MonoBehaviour
         running = 236,
         falling = 7569,
         dead = 1598,
-    } 
+    }
 
     [SerializeField] private float speed = 4;
     [SerializeField] private LayerMask impassableObstacle;
     private AnimationState state = AnimationState.idle;
-    
+
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D collider;
     private SpriteRenderer sprite;
     private Animator anim;
-    
+
     private Vector2 direction = Vector2.zero;
     private void Start()
     {
