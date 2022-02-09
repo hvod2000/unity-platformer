@@ -72,4 +72,8 @@ public class InputControlledMovableCharacter : MonoBehaviour
     {
         return !Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, direction, 0.01f, impassableObstacle);
     }
+
+    public void OnDeadlyRegionStay(GameObject regionGameObject)
+    {
+    }
 }
