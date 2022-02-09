@@ -33,11 +33,15 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     void Update()
     {
-        if (state == AnimationState.dead)
+        if (state != AnimationState.dead)
         {
-            return;
+            ProcessInput();
         }
+        UpdateAnimationState();
+    }
 
+    void ProcessInput()
+    {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (!canMoveInDirection(new Vector2(direction.x, 0f)))
         {
@@ -47,22 +51,24 @@ public class InputControlledMovableCharacter : MonoBehaviour
         Vector2 velocity = rigidbody2d.velocity;
         velocity.x = direction.x * speed;
         rigidbody2d.velocity = velocity;
-        UpdateAnimationState();
     }
 
     void UpdateAnimationState()
     {
-        state = AnimationState.idle;
-
-        if (direction.x != 0)
+        if (state != AnimationState.dead)
         {
-            sprite.flipX = (direction.x < 0);
-            state = AnimationState.running;
-        }
+            state = AnimationState.idle;
 
-        if (rigidbody2d.velocity.y < -0.1)
-        {
-            state = AnimationState.falling;
+            if (direction.x != 0)
+            {
+                sprite.flipX = (direction.x < 0);
+                state = AnimationState.running;
+            }
+
+            if (rigidbody2d.velocity.y < -0.1)
+            {
+                state = AnimationState.falling;
+            }
         }
 
         anim.SetInteger("desired state", (int)state);
