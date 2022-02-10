@@ -86,4 +86,22 @@ public class InputControlledMovableCharacter : MonoBehaviour
             state = AnimationState.dead;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log(collider.gameObject.name);
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
+        {
+            transform.SetParent(collider.gameObject.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        Debug.Log("exit");
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
+        {
+            transform.SetParent(null);
+        }
+    }
 }
