@@ -38,7 +38,6 @@ public class Movable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(collider.gameObject.name);
         if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
         {
             parents.Push(transform.parent);
@@ -48,7 +47,6 @@ public class Movable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        Debug.Log("exit");
         if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
         {
             transform.SetParent(parents.Pop());
