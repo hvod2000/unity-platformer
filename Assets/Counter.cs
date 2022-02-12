@@ -5,11 +5,19 @@ using UnityEngine;
 public class Counter : MonoBehaviour
 {
     public string name = "counter";
-    public int counted = 0;
+    public IntVariable counted;
+
+    private void Start()
+    {
+        if (!counted)
+        {
+            counted = ScriptableObject.CreateInstance<IntVariable>();
+        }
+    }
 
     public void Count(int delta)
     {
-        counted += delta;
+        counted.value += delta;
     }
 
     public static Counter GetCounter(GameObject gameObject, string name)
