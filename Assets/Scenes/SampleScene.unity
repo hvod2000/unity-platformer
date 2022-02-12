@@ -3967,7 +3967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: deaths
-  counted: 0
+  counted: {fileID: 11400000, guid: cecbfda525628cd7ba9dd0c231962378, type: 2}
 --- !u!1 &2142638245
 GameObject:
   m_ObjectHideFlags: 0
