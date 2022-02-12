@@ -7,7 +7,7 @@ public class RegionOfDeath : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.TryGetComponent<InputControlledMovableCharacter>(out var player))
+        if (other.TryGetComponent<HealthState>(out var player))
         {
             player.OnDeadlyRegionStay(gameObject);
         }
