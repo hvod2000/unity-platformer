@@ -27,11 +27,17 @@ public class HealthState : MonoBehaviour
     }
 
     [SerializeField] private bool alive = true;
+
+    [SerializeField] private Counter deathCounter;
     private Rigidbody2D rigidbody2D;
 
     private void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        if (!deathCounter)
+        {
+            deathCounter = Counter.GetCounter(gameObject, "deaths");
+        }
     }
 
     public void OnDeadlyRegionStay(GameObject regionGameObject)
@@ -62,6 +68,12 @@ public class HealthState : MonoBehaviour
         {
             movable.enabled = false;
         }
+
+        if (deathCounter)
+        {
+            deathCounter.Count(1);
+        }
+
         alive = false;
     }
 }
