@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputControlledMovableCharacter : MonoBehaviour
+public class Movable : MonoBehaviour
 {
     [SerializeField] private float speed = 4;
     [SerializeField] private LayerMask impassableObstacle;
@@ -19,20 +19,9 @@ public class InputControlledMovableCharacter : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        ProcessInput();
-    }
-
-    void ProcessInput()
-    {
-        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        GoInDirection(direction.x);
-    }
-
     public void GoInDirection(float movingDirection)
     {
-        if (!CanMoveInDirection(new Vector2(movingDirection, 0f)))
+        if (!this.enabled || !CanMoveInDirection(new Vector2(movingDirection, 0f)))
         {
             return;
         }

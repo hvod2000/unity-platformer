@@ -49,7 +49,7 @@ public class HealthState : MonoBehaviour
 
     private void Resurrect()
     {
-        if (TryGetComponent<InputControlledMovableCharacter>(out var movable))
+        if (TryGetComponent<Movable>(out var movable))
         {
             movable.enabled = true;
         }
@@ -58,7 +58,7 @@ public class HealthState : MonoBehaviour
 
     private void Die()
     {
-        if (TryGetComponent<InputControlledMovableCharacter>(out var movable))
+        if (TryGetComponent<Movable>(out var movable))
         {
             movable.enabled = false;
         }
