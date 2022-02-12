@@ -47,7 +47,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     public void GoInDirection(float movingDirection)
     {
-        if (!canMoveInDirection(new Vector2(movingDirection, 0f)))
+        if (!CanMoveInDirection(new Vector2(movingDirection, 0f)))
         {
             return;
         }
@@ -56,7 +56,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
         rigidbody2d.velocity = velocity;
     }
 
-    void UpdateAnimationState()
+    private void UpdateAnimationState()
     {
         if (state != AnimationState.dead)
         {
@@ -77,7 +77,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
         anim.SetInteger("desired state", (int)state);
     }
 
-    bool canMoveInDirection(Vector2 direction)
+    private bool CanMoveInDirection(Vector2 direction)
     {
         return !Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, direction, 0.01f, impassableObstacle);
     }
