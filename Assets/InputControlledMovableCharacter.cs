@@ -43,13 +43,17 @@ public class InputControlledMovableCharacter : MonoBehaviour
     void ProcessInput()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (!canMoveInDirection(new Vector2(direction.x, 0f)))
-        {
-            direction.x = 0f;
-        }
+        GoInDirection(direction.x);
+    }
 
+    public void GoInDirection(float movingDirection)
+    {
+        if (!canMoveInDirection(new Vector2(movingDirection, 0f)))
+        {
+            return;
+        }
         Vector2 velocity = rigidbody2d.velocity;
-        velocity.x = direction.x * speed;
+        velocity.x = movingDirection * speed;
         rigidbody2d.velocity = velocity;
     }
 
