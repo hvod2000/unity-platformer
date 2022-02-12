@@ -22,7 +22,6 @@ public class InputControlledMovableCharacter : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
-    private Vector2 direction = Vector2.zero;
     private void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -42,7 +41,7 @@ public class InputControlledMovableCharacter : MonoBehaviour
 
     void ProcessInput()
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         GoInDirection(direction.x);
     }
 
@@ -63,9 +62,9 @@ public class InputControlledMovableCharacter : MonoBehaviour
         {
             state = AnimationState.idle;
 
-            if (direction.x != 0)
+            if (Math.Abs(rigidbody2d.velocity.x) > 0.1)
             {
-                sprite.flipX = (direction.x < 0);
+                sprite.flipX = (rigidbody2d.velocity.x < 0);
                 state = AnimationState.running;
             }
 
