@@ -4,8 +4,29 @@ using UnityEngine;
 
 public class HealthState : MonoBehaviour
 {
-    public bool alive = true;
+    public bool Alive
+    {
+        get => alive;
 
+        set
+        {
+            if (value == alive)
+            {
+                return;
+            }
+
+            if (value)
+            {
+                Resurrect();
+            }
+            else
+            {
+                Die();
+            }
+        }
+    }
+
+    [SerializeField] private bool alive = true;
     private Rigidbody2D rigidbody2D;
 
     private void Start()
@@ -22,7 +43,25 @@ public class HealthState : MonoBehaviour
 
         if (rigidbody2D && rigidbody2D.velocity.y < -0.1)
         {
-            alive = false;
+            Alive = false;
         }
+    }
+
+    private void Resurrect()
+    {
+        if (TryGetComponent<InputControlledMovableCharacter>(out var movable))
+        {
+            movable.enabled = true;
+        }
+        alive = true;
+    }
+
+    private void Die()
+    {
+        if (TryGetComponent<InputControlledMovableCharacter>(out var movable))
+        {
+            movable.enabled = false;
+        }
+        alive = false;
     }
 }
