@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf9a16da7e2c4306884288f942e6730, type: 3}
   m_Name: Deaths
   m_EditorClassIdentifier: 
-  value: 46
+  isSavedBetweenSessions: 1
+  value: 0
