@@ -8,6 +8,7 @@ public class Movable : MonoBehaviour
     [SerializeField] private float speed = 4;
     [SerializeField] private LayerMask impassableObstacle;
 
+    private Stack<Transform> parents = new Stack<Transform>();
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D collider;
     private Animator anim;
@@ -40,6 +41,7 @@ public class Movable : MonoBehaviour
         Debug.Log(collider.gameObject.name);
         if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
         {
+            parents.Push(transform.parent);
             transform.SetParent(collider.gameObject.transform);
         }
     }
@@ -49,7 +51,7 @@ public class Movable : MonoBehaviour
         Debug.Log("exit");
         if (collider.gameObject.layer == LayerMask.NameToLayer("Impassable Obstacle"))
         {
-            transform.SetParent(null);
+            transform.SetParent(parents.Pop());
         }
     }
 }
