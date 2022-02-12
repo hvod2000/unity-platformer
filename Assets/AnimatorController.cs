@@ -29,12 +29,14 @@ public class AnimatorController : MonoBehaviour
     }
 
     private State currentAnimationState;
+    private SpriteRenderer sprite;
     private HealthState health;
     private Rigidbody2D body2D;
     private Animator animator;
 
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         health = GetComponent<HealthState>();
         body2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -42,10 +44,14 @@ public class AnimatorController : MonoBehaviour
 
     void Update()
     {
-        AnimationState = GetNextAnimationState();
+        if (body2D && Math.Abs(body2D.velocity.x) > 0.1)
+        {
+            sprite.flipX = (body2D.velocity.x < 0);
+        }
+        AnimationState = NextAnimationState();
     }
 
-    private State GetNextAnimationState()
+    private State NextAnimationState()
     {
         if (health && !health.Alive)
         {
